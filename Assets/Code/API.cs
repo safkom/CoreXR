@@ -42,11 +42,11 @@ public class API : MonoBehaviour
     }
     public void Nazaj()
     {
-        SceneManager.LoadScene("Scroll");
+        SceneManager.LoadScene("Scroll V2");
     }
     public void Go()
     {
-        SceneManager.LoadScene("BlankAR");
+        SceneManager.LoadScene("AR");
     }
 
     public void NewPage(string asset_name, string description, string asset_image, string url)

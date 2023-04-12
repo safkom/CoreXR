@@ -8,6 +8,6 @@ public class Continue : MonoBehaviour
    
     public void Move()
     {     
-        SceneManager.LoadScene("Scroll");
+        SceneManager.LoadScene("Scroll V2");
     }
 }

@@ -6,23 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ExampleAssets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/UI.unity
+    guid: 09d2f5af22632fa42ad7dd86450b1f93
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 0e83d7ac2ec3f784690f37cc3fbc8fd0
   - enabled: 1
-    path: Assets/Scenes/UI.unity
-    guid: 09d2f5af22632fa42ad7dd86450b1f93
-  - enabled: 1
     path: Assets/Scenes/Scroll V1.unity
     guid: 7884d562e8e6018458fbbabc5558f5ec
   - enabled: 1
-    path: Assets/Scenes/BlankAR.unity
-    guid: 6bdce89659816455b9f906fc62d19910
-  - enabled: 1
-    path: Assets/Scenes/Scroll.unity
+    path: Assets/Scenes/Scroll V2.unity
     guid: 5a806d63934ea0e45a486e60f93d2fa2
+  - enabled: 1
+    path: Assets/Scenes/AR.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 89a6d18d3df8d3e4fa917b0f9a963bc0, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: de8a8e4f987434338a4b1062feb8d069, type: 2}
