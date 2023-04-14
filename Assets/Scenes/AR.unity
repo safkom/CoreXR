@@ -1411,10 +1411,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d9f92a5a01b492d902323cac119fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 919132149155446097, guid: ca586c332e6d843338d692da760e5a38, type: 3}
+  objectToPlace: {fileID: 0}
   placementIndicator: {fileID: 531673521}
   pointer: {fileID: 1898220023}
   reset: {fileID: 1924876540}
+  cakaj: 0
   spawnedObject: {fileID: 0}
 --- !u!4 &1186106257
 Transform:
@@ -1890,7 +1891,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1645875116}
-  - component: {fileID: 1645875115}
+  - component: {fileID: 1645875117}
   m_Layer: 0
   m_Name: API
   m_TagString: Untagged
@@ -1898,19 +1899,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1645875115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645875114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfd6c5680a0f6f344b7fcfab03a64697, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ModelURL: 
 --- !u!4 &1645875116
 Transform:
   m_ObjectHideFlags: 0
@@ -1926,6 +1914,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1645875117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645875114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7c906bc7c428b4894bd5d1df33ab53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  url: 
+  fileName: aaaa
 --- !u!1 &1767797496
 GameObject:
   m_ObjectHideFlags: 0

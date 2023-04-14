@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
 using System;
-
-
+using TriLibCore.Samples;
 
 public class PlaceIt : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class PlaceIt : MonoBehaviour
     public GameObject pointer;
     //ui button
     public GameObject reset;
+    public bool cakaj;
 
     public GameObject spawnedObject;
     private ARSessionOrigin arOrigin;
@@ -84,13 +84,11 @@ public class PlaceIt : MonoBehaviour
     {
         arOrigin = FindObjectOfType<ARSessionOrigin>();
         pointer.SetActive(false);
-    
-
     }
 
     void Update()
     {
-
+        objectToPlace = GameObject.Find("1");
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
@@ -160,8 +158,6 @@ private void PlaceObject()
     spawnedObject = Instantiate(objectToPlace, placementPose.position, placementPose.rotation * objectToPlace.transform.rotation);
     spawnedObject.name = "spawnedObject";
 
-
-    
 
 
     //hide placementIndicator

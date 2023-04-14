@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
+
 namespace TriLibCore.Samples
 {
     /// <summary>
@@ -17,6 +19,8 @@ namespace TriLibCore.Samples
         /// The Model URL.
         /// </summary>
         public string ModelURL;
+        public bool dokoncano;
+        public GameObject Objekt;
 
 
         /// <summary>
@@ -67,6 +71,8 @@ namespace TriLibCore.Samples
         private void OnMaterialsLoad(AssetLoaderContext assetLoaderContext)
         {
             Debug.Log("Materials loaded. Model fully loaded.");
+            Objekt = GameObject.Find("1");
+            //Objekt.SetActive(false);
         }
 
         /// <summary>
