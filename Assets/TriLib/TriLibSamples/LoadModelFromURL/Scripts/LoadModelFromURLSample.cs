@@ -19,8 +19,6 @@ namespace TriLibCore.Samples
         /// The Model URL.
         /// </summary>
         public string ModelURL;
-        public bool dokoncano;
-        public GameObject Objekt;
 
 
         /// <summary>
@@ -31,16 +29,11 @@ namespace TriLibCore.Samples
         /// </remarks>
         public void Start()
         {
-            // ModelURL = PlayerPrefs.GetString("url");
+            ModelURL = PlayerPrefs.GetString("url");
             var assetLoaderOptions = AssetLoader.CreateDefaultLoaderOptions();
             var webRequest = AssetDownloader.CreateWebRequest(ModelURL);
             AssetDownloader.LoadModelFromUri(webRequest, OnLoad, OnMaterialsLoad, OnProgress, OnError, null, assetLoaderOptions);
-        }
-
-        public void Awake()
-        {
-            ModelURL = PlayerPrefs.GetString("url");
-        }
+        }   
 
 
 
@@ -71,8 +64,6 @@ namespace TriLibCore.Samples
         private void OnMaterialsLoad(AssetLoaderContext assetLoaderContext)
         {
             Debug.Log("Materials loaded. Model fully loaded.");
-            Objekt = GameObject.Find("1");
-            //Objekt.SetActive(false);
         }
 
         /// <summary>

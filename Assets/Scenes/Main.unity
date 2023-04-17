@@ -167,5 +167,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7c906bc7c428b4894bd5d1df33ab53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: 
-  fileName: 
+  url: http://www.corexr.si/api/uploads/strawberry_fbx.fbx
+  fileName: strawberry_fbx.fbx

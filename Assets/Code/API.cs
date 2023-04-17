@@ -46,7 +46,7 @@ public class API : MonoBehaviour
     }
     public void Go()
     {
-        SceneManager.LoadScene("AR");
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void NewPage(string asset_name, string description, string asset_image, string url)
@@ -59,6 +59,7 @@ public class API : MonoBehaviour
         opis.text = description;
         TextureURL = "https://corexr.si/api/uploads/" + asset_image;
         PlayerPrefs.SetString("url", "corexr.si/api/uploads/" + url);
+        PlayerPrefs.SetString("file", url);
         StartCoroutine(DownloadImage(TextureURL));
     }
 
