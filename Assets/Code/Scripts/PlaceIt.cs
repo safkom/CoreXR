@@ -93,9 +93,6 @@ public class PlaceIt : MonoBehaviour
         // Assign the gameobject to the public variable
         objectToPlace = originalObject;
 
-        // Hide the original gameobject from view
-        originalObject.SetActive(false);
-
         arOrigin = FindObjectOfType<ARSessionOrigin>();
         pointer.SetActive(false);
     }
@@ -168,10 +165,9 @@ public class PlaceIt : MonoBehaviour
     }
 private void PlaceObject()
 {
-    originalObject.SetActive(true);
+    originalObject.GetComponent<Renderer>().enabled = true;
     spawnedObject = Instantiate(objectToPlace, placementPose.position, placementPose.rotation * objectToPlace.transform.rotation);
     spawnedObject.name = "spawnedObject";
-    originalObject.SetActive(false);
     
 
 
@@ -199,7 +195,8 @@ private void PlaceObject()
         modelPart.gameObject.GetComponent<MeshCollider>().isTrigger = true;
 
     }
-}
+       originalObject.GetComponent<Renderer>().enabled = false;
+    }
 
 
 

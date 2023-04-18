@@ -1536,7 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d9f92a5a01b492d902323cac119fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 919132149155446097, guid: ca586c332e6d843338d692da760e5a38, type: 3}
+  objectToPlace: {fileID: 0}
   placementIndicator: {fileID: 531673521}
   pointer: {fileID: 1898220023}
   reset: {fileID: 1924876540}
