@@ -20,7 +20,7 @@ public class PlaceIt : MonoBehaviour
     private ARSessionOrigin arOrigin;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
-
+    private GameObject originalObject;
 
     private float initialDistance;
     private Vector3 initialScale;
@@ -81,17 +81,28 @@ public class PlaceIt : MonoBehaviour
             placementPose.rotation = Quaternion.LookRotation(cameraBearing);
         }
     }
-    void Start()
+
+    IEnumerator Start()
     {
+        // Wait until the gameobject with the name "1" appears in the scene
+        yield return new WaitUntil(() => GameObject.Find("1") != null);
+
+        // Get a reference to the gameobject with the name "1"
+        originalObject = GameObject.Find("1");
+
+        // Assign the gameobject to the public variable
+        objectToPlace = originalObject;
+
+        // Hide the original gameobject from view
+        originalObject.SetActive(false);
+
         arOrigin = FindObjectOfType<ARSessionOrigin>();
         pointer.SetActive(false);
-        
     }
-
 
     void Update()
     {
-        objectToPlace = GameObject.Find("1");
+        
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
@@ -101,7 +112,6 @@ public class PlaceIt : MonoBehaviour
             //GetComponent<CreateLabels>().Create();
 
             GetComponent<OnClickHideOthers>().SetHideObject();
-
 
         }
         //scale object based on pitch
@@ -158,8 +168,11 @@ public class PlaceIt : MonoBehaviour
     }
 private void PlaceObject()
 {
+    originalObject.SetActive(true);
     spawnedObject = Instantiate(objectToPlace, placementPose.position, placementPose.rotation * objectToPlace.transform.rotation);
     spawnedObject.name = "spawnedObject";
+    originalObject.SetActive(false);
+    
 
 
     
