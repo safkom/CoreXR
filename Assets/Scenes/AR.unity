@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &40919615
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -182,11 +182,19 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.007018419
+    widthMultiplier: 0.01
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -247,7 +255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40919614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00048431754, y: 0.0013840646, z: -0.00048431754}
+  m_LocalPosition: {x: -0.00048431754, y: 0.0013840646, z: -0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -886,6 +894,7 @@ GameObject:
   - component: {fileID: 684734314}
   - component: {fileID: 684734313}
   - component: {fileID: 684734318}
+  - component: {fileID: 684734319}
   m_Layer: 5
   m_Name: Pointer_laser_button
   m_TagString: Untagged
@@ -1013,7 +1022,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1186106258}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pointer, Assembly-CSharp
           m_MethodName: OnPointerUp
           m_Mode: 0
@@ -1029,7 +1038,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1186106258}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Pointer, Assembly-CSharp
           m_MethodName: OnPointerDown
           m_Mode: 0
@@ -1041,6 +1050,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &684734319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684734311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74662d64d342c4d10b42d49c01e59bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointItScript: {fileID: 1186106256}
+  laserPrefab: {fileID: 4016789139028983229, guid: c42eeca3093fcef41b72fcba530ade2a, type: 3}
+  laserDistance: 100
+  laserLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1458,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1186106257}
   - component: {fileID: 1186106256}
-  - component: {fileID: 1186106258}
   - component: {fileID: 1186106259}
   - component: {fileID: 1186106260}
   - component: {fileID: 1186106261}
@@ -1476,22 +1502,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1186106258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186106255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74662d64d342c4d10b42d49c01e59bf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _laserButton: {fileID: 684734313}
-  _raycastManager: {fileID: 223974229}
-  _laser: {fileID: 40919615}
-  _raycastOrigin: {fileID: 223974228}
 --- !u!114 &1186106259
 MonoBehaviour:
   m_ObjectHideFlags: 0
