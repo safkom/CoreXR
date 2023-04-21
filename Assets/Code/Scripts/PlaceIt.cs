@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
 using System;
-using System.IO;
-using UnityEditor;
 using UnityEngine.Networking;
+
+
 
 public class PlaceIt : MonoBehaviour
 {
@@ -20,16 +20,16 @@ public class PlaceIt : MonoBehaviour
     private ARSessionOrigin arOrigin;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
-    private GameObject originalObject;
+
 
     private float initialDistance;
     private Vector3 initialScale;
 
 
+   
 
 
-
-    // Public property to access spawnedObject
+      // Public property to access spawnedObject
     public GameObject GetSpawnedObject()
     {
         return spawnedObject;
@@ -81,25 +81,33 @@ public class PlaceIt : MonoBehaviour
             placementPose.rotation = Quaternion.LookRotation(cameraBearing);
         }
     }
-
-    IEnumerator Start()
+    void Start()
     {
-        // Wait until the gameobject with the name "1" appears in the scene
-        yield return new WaitUntil(() => GameObject.Find("1") != null);
-
-        // Get a reference to the gameobject with the name "1"
-        originalObject = GameObject.Find("1");
-
-        // Assign the gameobject to the public variable
-        objectToPlace = originalObject;
-
         arOrigin = FindObjectOfType<ARSessionOrigin>();
         pointer.SetActive(false);
+        StartCoroutine(WaitForObject());
+
     }
+    
+
+        IEnumerator WaitForObject()
+        {
+            // Wait until the object with the name "1" is spawned
+            GameObject obj = null;
+            while (obj == null)
+            {
+                obj = GameObject.Find("1");
+                yield return null;
+            }
+            obj.transform.position = new Vector3(100000.0f, 2.0f, 3.0f);
+            objectToPlace = obj;
+        // Execute your code here
+        Debug.Log("Object with name '1' has been spawned.");
+        }
 
     void Update()
     {
-        
+
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
@@ -109,6 +117,7 @@ public class PlaceIt : MonoBehaviour
             //GetComponent<CreateLabels>().Create();
 
             GetComponent<OnClickHideOthers>().SetHideObject();
+
 
         }
         //scale object based on pitch
@@ -165,10 +174,8 @@ public class PlaceIt : MonoBehaviour
     }
 private void PlaceObject()
 {
-    originalObject.GetComponent<Renderer>().enabled = true;
     spawnedObject = Instantiate(objectToPlace, placementPose.position, placementPose.rotation * objectToPlace.transform.rotation);
     spawnedObject.name = "spawnedObject";
-    
 
 
     
@@ -195,8 +202,7 @@ private void PlaceObject()
         modelPart.gameObject.GetComponent<MeshCollider>().isTrigger = true;
 
     }
-       originalObject.GetComponent<Renderer>().enabled = false;
-    }
+}
 
 
 
