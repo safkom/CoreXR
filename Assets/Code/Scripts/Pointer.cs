@@ -51,40 +51,34 @@ public class Pointer : MonoBehaviour
     }
 
     private IEnumerator RaycastLaser()
+{
+    while (true)
     {
-        while (true)
+        // Cast a ray from the center of the screen
+        Vector3 screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
+
+        // Get the world position of the button
+        Vector3 buttonWorldPosition = _laserButton.transform.position;
+
+        // Set the laser's start position to the button's world position
+        _laser.SetPosition(1, buttonWorldPosition);
+
+        // Raycast to find the position to set as the laser's end position
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+        if (_raycastManager.Raycast(screenCenter, hits))
         {
-            // Cast a ray from the center of the screen
-            Vector3 screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
-
-
-         
-
-            //user camera
-            List<ARRaycastHit> hits = new List<ARRaycastHit>();
-            if (_raycastManager.Raycast(screenCenter, hits))
-            {
-                //if raycast hits the object
-               
-
-                // Get the position of the hit point and set the laser's end position
-                Vector3 hitPosition = hits[0].pose.position;
-
-
-                
-                _laser.SetPosition(1, worldPosition);
-                _laser.SetPosition(0, hitPosition);
-            }
-            else
-            {
-
-
-                _laser.SetPosition(1, worldPosition);
-                _laser.SetPosition(0, Vector3.forward * 1000f);
-
-            }
-
-            yield return null;
+            // Set the laser's end position to the hit point if the raycast hits something
+            Vector3 hitPosition = hits[0].pose.position;
+            _laser.SetPosition(0, hitPosition);
         }
+        else
+        {
+            // Set the laser's end position to the center of the screen if the raycast does not hit anything
+            _laser.SetPosition(0, Camera.current.ScreenToWorldPoint(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, Camera.current.nearClipPlane)));
+        }
+
+        yield return null;
     }
+}
+
 }
