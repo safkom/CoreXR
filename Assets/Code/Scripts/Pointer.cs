@@ -1,40 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pointer : MonoBehaviour
 {
+    public float maxDistance = 10f;
+    public LayerMask layerMask;
     public GameObject laserPrefab;
-    public LayerMask laserLayerMask;
-    
-    private PlaceIt placeItScript;
-    private GameObject currentLaser;
+    public Transform laserSpawnPoint;
+    public KeyCode laserButton = KeyCode.Mouse0;
 
-    void Start()
+    private GameObject currentLaser;
+    private Transform pointerTransform;
+
+    private void Start()
     {
-        placeItScript = FindObjectOfType<PlaceIt>();
+        pointerTransform = transform.GetChild(0);
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(laserButton))
         {
-            currentLaser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            currentLaser = Instantiate(laserPrefab, laserSpawnPoint.position, laserSpawnPoint.rotation);
         }
-
-        if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKey(laserButton))
         {
-            Destroy(currentLaser);
-            
-            // Calculate the direction from the button to the center of the screen
-            Vector3 direction = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)) - transform.position;
-            
-            // Cast a ray in the direction of the laser
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, laserLayerMask))
+            if (currentLaser != null)
             {
-                // Move the spawned object to the position of the hit point
-                placeItScript.spawnedObject.transform.position = hit.point;
+                RaycastHit hit;
+                if (Physics.Raycast(pointerTransform.position, pointerTransform.forward, out hit, maxDistance, layerMask))
+                {
+                    currentLaser.transform.LookAt(hit.point);
+                }
+                else
+                {
+                    currentLaser.transform.rotation = pointerTransform.rotation;
+                    currentLaser.transform.position = laserSpawnPoint.position + pointerTransform.forward * maxDistance;
+                }
+            }
+        }
+        else if (Input.GetKeyUp(laserButton))
+        {
+            if (currentLaser != null)
+            {
+                Destroy(currentLaser);
             }
         }
     }

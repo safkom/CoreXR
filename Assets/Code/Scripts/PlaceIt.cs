@@ -24,6 +24,9 @@ public class PlaceIt : MonoBehaviour
 
     private float initialDistance;
     private Vector3 initialScale;
+    private Touch touch;
+    private float speedModifier = 0.01f;
+    bool isRotationEnabled;
 
 
    
@@ -85,6 +88,7 @@ public class PlaceIt : MonoBehaviour
     {
         arOrigin = FindObjectOfType<ARSessionOrigin>();
         pointer.SetActive(false);
+        isRotationEnabled = true;
         StartCoroutine(WaitForObject());
 
     }
@@ -105,74 +109,84 @@ public class PlaceIt : MonoBehaviour
         Debug.Log("Object with name '1' has been spawned.");
         }
 
-    void Update()
+
+void Update()
+{
+    UpdatePlacementPose();
+    UpdatePlacementIndicator();
+
+    if (spawnedObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
     {
+        PlaceObject();
+        GetComponent<OnClickHideOthers>().SetHideObject();
+    }
 
-        UpdatePlacementPose();
-        UpdatePlacementIndicator();
-
-        if (spawnedObject==null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            PlaceObject();
-            //GetComponent<CreateLabels>().Create();
-
-            GetComponent<OnClickHideOthers>().SetHideObject();
-
-
-        }
-        //scale object based on pitch
-        if (spawnedObject != null)
-        {
-           if(Input.touchCount == 2)
+    if (spawnedObject != null)
+    {
+        if (Input.touchCount == 2)
         {
             var touchZero = Input.GetTouch(0);
             var touchOne = Input.GetTouch(1);
 
-            if(touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
+            if (touchZero.phase == TouchPhase.Ended || touchZero.phase == TouchPhase.Canceled ||
                 touchOne.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Canceled)
             {
-                return; 
+                return;
             }
 
-            if(touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+            if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
             {
                 initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
                 initialScale = spawnedObject.transform.localScale;
-    
             }
             else
             {
-               var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
 
                 if (Mathf.Approximately(initialDistance, 0))
                 {
-                    return; 
+                    return;
                 }
 
-               var factor = currentDistance / initialDistance;
-                spawnedObject.transform.localScale = initialScale * factor;
+                var factor = currentDistance / initialDistance;
+                spawnedObject.transform.localScale = isRotationEnabled ? initialScale * factor : initialScale;
             }
-
-            
         }
 
-        if(Input.touchCount == 1){
-            if(Input.GetTouch(0).phase == TouchPhase.Moved){
-                //rotate
-                Vector3 center = spawnedObject.transform.position;
+        if (Input.touchCount == 1)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                if (!isRotationEnabled)
+                {
+                    // Move the object
+                    float moveSpeed = 0.001f;
+                    Vector3 deltaPos = new Vector3(Input.GetTouch(0).deltaPosition.x, 0, Input.GetTouch(0).deltaPosition.y) * moveSpeed;
+                    spawnedObject.transform.position += deltaPos;
+                }
+                else
+                {
+                    // Rotate the object
+                    float rotationSpeed = 0.1f;
+                    float deltaX = Input.GetTouch(0).deltaPosition.x * rotationSpeed;
 
-                spawnedObject.transform.RotateAround(center, Vector3.up, Input.GetTouch(0).deltaPosition.x);
+                    Vector3 center = spawnedObject.transform.position;
+                    Quaternion rotation = Quaternion.Euler(0, -deltaX, 0);
 
-
-
+                    spawnedObject.transform.RotateAround(center, Vector3.up, -deltaX);
+                }
             }
-
-     }
-
-
         }
     }
-private void PlaceObject()
+}
+
+public void ToggleRotation()
+{
+    isRotationEnabled = !isRotationEnabled;
+}
+
+
+public void PlaceObject()
 {
     spawnedObject = Instantiate(objectToPlace, placementPose.position, placementPose.rotation * objectToPlace.transform.rotation);
     spawnedObject.name = "spawnedObject";
