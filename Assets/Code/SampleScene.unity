@@ -1380,6 +1380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1186106257}
   - component: {fileID: 1186106256}
+  - component: {fileID: 1186106265}
   - component: {fileID: 1186106260}
   - component: {fileID: 1186106261}
   - component: {fileID: 1186106263}
@@ -1478,6 +1479,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1186106265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186106255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb8630a007154c3684711bcb1c9feb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1207542704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,9 +1554,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1186106261}
-        m_TargetAssemblyTypeName: OnClickHideOthers, Assembly-CSharp
-        m_MethodName: UnhideChildren
+      - m_Target: {fileID: 1186106265}
+        m_TargetAssemblyTypeName: Show, Assembly-CSharp
+        m_MethodName: SplitOrRevert
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

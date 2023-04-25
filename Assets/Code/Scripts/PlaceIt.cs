@@ -49,8 +49,6 @@ public class PlaceIt : MonoBehaviour
             spawnedObject = null;
             placementIndicator.SetActive(true);
             pointer.SetActive(false);
-
-            
         }
     }
     
@@ -104,7 +102,8 @@ public class PlaceIt : MonoBehaviour
                 yield return null;
             }
             obj.transform.position = new Vector3(100000.0f, 2.0f, 3.0f);
-            objectToPlace = obj;
+            Animation myAnimation = obj.GetComponent<Animation>();
+            Destroy(myAnimation);
         // Execute your code here
         Debug.Log("Object with name '1' has been spawned.");
         }
