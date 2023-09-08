@@ -106,6 +106,7 @@ public class PlaceIt : MonoBehaviour
             Destroy(myAnimation);
         // Execute your code here
         Debug.Log("Object with name '1' has been spawned.");
+        objectToPlace = obj;
         }
 
 

@@ -34,7 +34,7 @@ namespace TriLibCore
             switch (httpRequestMethod)
             {
                 case HttpRequestMethod.Post:
-                    unityWebRequest = UnityWebRequest.Post(uri, data);
+                    unityWebRequest = UnityWebRequest.PostWwwForm(uri, data);
                     break;
                 case HttpRequestMethod.Put:
                     unityWebRequest = UnityWebRequest.Put(uri, data);
